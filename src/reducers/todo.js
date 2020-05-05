@@ -1,11 +1,13 @@
 import update from 'immutability-helper';
 
+const items = [{id: 1, title: 'Play with dog', done: false}];
+
 const initialState = {
-  items: [
-    {id: 1, title: 'Play with dog', done: false},
-  ],
+  items,
   newItem: '',
 };
+
+let counter = items.length;
 
 function todoReducer(state = initialState, action) {
   switch (action.type) {
@@ -54,10 +56,11 @@ function todoReducer(state = initialState, action) {
           }
       });
     case 'TODO/NEW_ITEM_SUBMITTED':
+      counter++;
       return update(state, {
         items: {
           $push: [{
-            id: state.items.length + 1,
+            id: counter,
             title: state.newItem,
             done: false,
           }]
