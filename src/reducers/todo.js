@@ -24,6 +24,24 @@ function todoReducer(state = initialState, action) {
             items,
           }
       });
+    case 'TODO/ITEM_REMOVE':
+      const fromState = state.items.slice();
+
+      let indexToRemove;
+      fromState.forEach((item, index) => {
+        if (item.id === action.payload.id) {
+          indexToRemove = index;
+        }
+      });
+
+      fromState.splice(indexToRemove, 1);
+
+      return update(state, {
+        $merge:
+          {
+            items: fromState,
+          }
+      });
     case 'TODO/NEW_ITEM_CHANGED':
       return update(state, {
         $merge:

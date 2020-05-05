@@ -14,9 +14,14 @@ const mapDispatchToProps = dispatch => {
         id,
       }
     }),
+    onItemRemove: (id) => dispatch({
+      type: 'TODO/ITEM_REMOVE',
+      payload: {
+        id,
+      }
+    }),
   }
 };
-
 
 export default connect(
   mapStateToProps,
