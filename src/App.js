@@ -9,6 +9,7 @@ import Form from './containers/Form';
 function App() {
   return (
     <div className="container">
+      <h1>TODO with Redux</h1>
       <Filter />
       <Form />
       <Todos />
