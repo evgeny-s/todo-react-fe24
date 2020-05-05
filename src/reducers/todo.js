@@ -12,17 +12,21 @@ function todoReducer(state = initialState, action) {
     case 'TODO/ITEM_CLICKED':
       const items = state.items.slice();
 
-      items.forEach((item) => {
+      let indexToUpdate;
+      items.forEach((item, index) => {
         if (item.id === action.payload.id) {
-          item.done = !item.done;
+          indexToUpdate = index;
         }
       });
 
       return update(state, {
-        $merge:
-          {
-            items,
+        items: {
+          [indexToUpdate]: {
+            done: {
+              $set: !items[indexToUpdate].done
+            }
           }
+        }
       });
     case 'TODO/ITEM_REMOVE':
       const fromState = state.items.slice();
